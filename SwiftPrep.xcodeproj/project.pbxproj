@@ -6,10 +6,15 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXFileReference section */
+		209EADC425301017005B3F7D /* Pallindrome.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pallindrome.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				209EADC425301017005B3F7D /* Pallindrome.playground */,
 			);
 			sourceTree = "<group>";
 		};
