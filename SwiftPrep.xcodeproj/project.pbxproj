@@ -8,12 +8,18 @@
 
 /* Begin PBXFileReference section */
 		209EADC425301017005B3F7D /* Pallindrome.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pallindrome.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18132530703D00911B85 /* Factorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Factorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18142531919B00911B85 /* LongestWord.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LongestWord.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18152531D87400911B85 /* 04-LetterChanges.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "04-LetterChanges.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				AAAD18152531D87400911B85 /* 04-LetterChanges.playground */,
+				AAAD18142531919B00911B85 /* LongestWord.playground */,
+				AAAD18132530703D00911B85 /* Factorial.playground */,
 				209EADC425301017005B3F7D /* Pallindrome.playground */,
 			);
 			sourceTree = "<group>";
