@@ -11,12 +11,26 @@
 		AAAD18132530703D00911B85 /* Factorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Factorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD18142531919B00911B85 /* LongestWord.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LongestWord.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD18152531D87400911B85 /* 04-LetterChanges.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "04-LetterChanges.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18162532CB1800911B85 /* 05-SimpleAdding.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "05-SimpleAdding.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18172532D17800911B85 /* 06-LetterCapitalize.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "06-LetterCapitalize.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD18192532DD9900911B85 /* 07-SimpleSymbols.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "07-SimpleSymbols.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAAD181A2532E68B00911B85 /* 09-TimeConvert.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "09-TimeConvert.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449625330D71000246FE /* 10-AlhabetSoup.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "10-AlhabetSoup.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449725330F8F000246FE /* ABCheck.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ABCheck.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF844982534667A000246FE /* Closures.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Closures.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				AAF844982534667A000246FE /* Closures.playground */,
+				AAF8449725330F8F000246FE /* ABCheck.playground */,
+				AAF8449625330D71000246FE /* 10-AlhabetSoup.playground */,
+				AAAD181A2532E68B00911B85 /* 09-TimeConvert.playground */,
+				AAAD18192532DD9900911B85 /* 07-SimpleSymbols.playground */,
+				AAAD18172532D17800911B85 /* 06-LetterCapitalize.playground */,
+				AAAD18162532CB1800911B85 /* 05-SimpleAdding.playground */,
 				AAAD18152531D87400911B85 /* 04-LetterChanges.playground */,
 				AAAD18142531919B00911B85 /* LongestWord.playground */,
 				AAAD18132530703D00911B85 /* Factorial.playground */,
