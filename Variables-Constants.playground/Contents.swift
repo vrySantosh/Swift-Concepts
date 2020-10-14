@@ -27,3 +27,9 @@ print(floatliteral)
 var exponentLiteral = 3.143131e2
 print(exponentLiteral)
 
+var booleanLiteral = true
+print(booleanLiteral)
+
+var _ = "Initialsed but going to use the program" // Placeholder
+_ = "Placeholder" // Placehoder without keyword
+
