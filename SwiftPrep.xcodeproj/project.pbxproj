@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		2054912B253AEFF0008CD55B /* FlowControl.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FlowControl.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		209EADC425301017005B3F7D /* Pallindrome.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pallindrome.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD18132530703D00911B85 /* Factorial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Factorial.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD18142531919B00911B85 /* LongestWord.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LongestWord.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -31,6 +32,7 @@
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				2054912B253AEFF0008CD55B /* FlowControl.playground */,
 				AAF8449F2539DCC7000246FE /* Typealias.playground */,
 				AAF8449E2539BE03000246FE /* Operators.playground */,
 				AAF8449D25398329000246FE /* Expressions.playground */,
