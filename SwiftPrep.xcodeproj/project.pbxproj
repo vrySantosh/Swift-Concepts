@@ -21,12 +21,20 @@
 		AAF844992536CD31000246FE /* Variables-Constants.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Variables-Constants.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF8449A2537F28E000246FE /* DataTypes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DataTypes.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF8449B2538953A000246FE /* Optionals.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Optionals.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449C25395DA9000246FE /* Strings.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Strings.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449D25398329000246FE /* Expressions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Expressions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449E2539BE03000246FE /* Operators.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Operators.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF8449F2539DCC7000246FE /* Typealias.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Typealias.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				AAF8449F2539DCC7000246FE /* Typealias.playground */,
+				AAF8449E2539BE03000246FE /* Operators.playground */,
+				AAF8449D25398329000246FE /* Expressions.playground */,
+				AAF8449C25395DA9000246FE /* Strings.playground */,
 				AAF8449B2538953A000246FE /* Optionals.playground */,
 				AAF8449A2537F28E000246FE /* DataTypes.playground */,
 				AAF844992536CD31000246FE /* Variables-Constants.playground */,

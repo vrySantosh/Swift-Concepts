@@ -84,3 +84,23 @@ escapingClosureExample {
     print("excute escaping closure")
 }
 
+// Closure as a completion block
+// Note: 1. Use @escaping when you want use closure after the function execution
+// Note: 2. Use @escaping when you want the completion is to be exxecuted in the asynchronous way. (which means executing a peice of code after the function return or function done with its course)
+func completionClosure(completion: @escaping ()->()) -> String
+{
+    //perform operation before calling call back
+    print("function callled")
+    print("doing some work before calling callback")
+    completion()
+    closureArr.append(completion)
+    print("do something after callback")
+    //this will be called after completing callback
+    
+    return "returning the completion function"
+}
+
+var comClosure = completionClosure {
+    print("this completion call back is called")
+}
+print(comClosure)
