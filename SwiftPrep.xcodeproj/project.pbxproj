@@ -16,6 +16,8 @@
 		AAAD18172532D17800911B85 /* 06-LetterCapitalize.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "06-LetterCapitalize.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD18192532DD9900911B85 /* 07-SimpleSymbols.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "07-SimpleSymbols.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAAD181A2532E68B00911B85 /* 09-TimeConvert.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "09-TimeConvert.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AADF2426253CD364003697A3 /* Types.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Types.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AADF2427253CD755003697A3 /* ARC.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ARC.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF0CACE253C711A003BE862 /* Collections.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Collections.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF0CACF253C8631003BE862 /* Functions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF8449625330D71000246FE /* 10-AlhabetSoup.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "10-AlhabetSoup.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -34,6 +36,8 @@
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				AADF2427253CD755003697A3 /* ARC.playground */,
+				AADF2426253CD364003697A3 /* Types.playground */,
 				AAF0CACF253C8631003BE862 /* Functions.playground */,
 				AAF0CACE253C711A003BE862 /* Collections.playground */,
 				2054912B253AEFF0008CD55B /* FlowControl.playground */,
