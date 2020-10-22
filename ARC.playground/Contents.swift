@@ -20,7 +20,7 @@ class classA {
 
 class classB {
     
-    // Without " weak " or "unowned" keyword the retain count cannot be 0, when the assigned object is nil
+    // Without " weak " or "unowned" keyword the retain count cannot be 0, when the object assigned to nil.
     /*
      `Difereces`: weak vs unowned
      == weak ==
@@ -68,7 +68,8 @@ func performOperations()
 performOperations()
 
 /*
- == Memory Management is Swift ==
+ == Memory Management in Swift ==
+ 
  1. ARC deos not increase or descrease reference count of value types because, when assigned, they are copied.
  2. The quick and dirty explanation is that reference types share a single copy of their data while value types keep a unique copy of their data.
  3. By default, all the references are strong references.
