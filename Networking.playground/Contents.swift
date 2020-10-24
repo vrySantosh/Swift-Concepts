@@ -31,6 +31,14 @@ let task = URLSession.shared.dataTask(with: url) {
     print("error: \(error)")
     
     DispatchQueue.main.async {
+        
+        // == Parsing Techniques ==
+        /*
+         1. Json Serialisation
+         2. Codable.
+         3. SBJson
+         */
+        
         if let data = data {
             label.text = String(decoding: data, as: UTF8.self)
         } else {
