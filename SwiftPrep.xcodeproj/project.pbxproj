@@ -22,6 +22,7 @@
 		AAF0CACE253C711A003BE862 /* Collections.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Collections.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF0CACF253C8631003BE862 /* Functions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF6D2CC254472B90048989F /* Protocols.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Protocols.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AAF6D2CD25484AA80048989F /* UOB-HackerRank.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "UOB-HackerRank.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF8449625330D71000246FE /* 10-AlhabetSoup.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "10-AlhabetSoup.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF8449725330F8F000246FE /* ABCheck.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ABCheck.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AAF844982534667A000246FE /* Closures.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Closures.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -38,6 +39,7 @@
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				AAF6D2CD25484AA80048989F /* UOB-HackerRank.playground */,
 				AAF6D2CC254472B90048989F /* Protocols.playground */,
 				AA67CD59253EADE70067A94D /* Networking.playground */,
 				AADF2427253CD755003697A3 /* ARC.playground */,
