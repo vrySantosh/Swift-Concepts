@@ -57,7 +57,7 @@ for val in someStrSet {
     print(val)
 }
 let someVal  = someStrSet.remove("aas")
-print(someVal)
+
 // if you want to handle the element in swift
 print(someStrSet)
 
@@ -103,3 +103,13 @@ print(newCombineDict[1] ?? 0)
 // Note: Default value for non-existent key
 print(newCombineDict[15, default:0])
 
+func rotLeft(a:inout [Int], d: Int) -> [Int] {
+    var b:[Int] = []
+    for var i in stride(from:d , through:0, by: -1) {
+        b.insert(a[i], at: b.count)
+        
+    }
+    return b
+}
+var array = [1,2,3,4,5]
+print(rotLeft(a:&array , d: 4))
