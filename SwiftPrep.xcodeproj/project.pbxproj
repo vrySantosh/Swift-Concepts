@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		0933144428D0392300EEADD6 /* RxSwift.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwift.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0933144528D03A4300EEADD6 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		097F021F28C2E34500CE8A54 /* Concurrency-MultiThreading.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Concurrency-MultiThreading.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		09B2074628D1A26B00A1F872 /* Subscripts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Subscripts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		09B2074728D7524100A1F872 /* Thales-SG-Codility.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Thales-SG-Codility.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2054912B253AEFF0008CD55B /* FlowControl.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FlowControl.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		209EADC425301017005B3F7D /* Pallindrome.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pallindrome.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AA67CD59253EADE70067A94D /* Networking.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Networking.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -40,6 +44,7 @@
 		097F021D28C2E12E00CE8A54 /* ProblemSolving */ = {
 			isa = PBXGroup;
 			children = (
+				09B2074728D7524100A1F872 /* Thales-SG-Codility.playground */,
 				AAF8449725330F8F000246FE /* ABCheck.playground */,
 				AAF6D2CD25484AA80048989F /* UOB-HackerRank.playground */,
 				AAF8449625330D71000246FE /* 10-AlhabetSoup.playground */,
@@ -58,6 +63,8 @@
 		097F021E28C2E19600CE8A54 /* SwiftConcepts */ = {
 			isa = PBXGroup;
 			children = (
+				09B2074628D1A26B00A1F872 /* Subscripts.playground */,
+				0933144428D0392300EEADD6 /* RxSwift.playground */,
 				AAF6D2CC254472B90048989F /* Protocols.playground */,
 				AA67CD59253EADE70067A94D /* Networking.playground */,
 				AADF2427253CD755003697A3 /* ARC.playground */,
@@ -81,6 +88,7 @@
 		209EADBC25300FA8005B3F7D = {
 			isa = PBXGroup;
 			children = (
+				0933144528D03A4300EEADD6 /* Podfile */,
 				097F021E28C2E19600CE8A54 /* SwiftConcepts */,
 				097F021D28C2E12E00CE8A54 /* ProblemSolving */,
 			);

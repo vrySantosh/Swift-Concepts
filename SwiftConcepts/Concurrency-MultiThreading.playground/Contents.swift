@@ -225,3 +225,113 @@ let thread = MyThread()
 thread.start()
 
 
+
+
+// PRomiseKit
+
+/**
+ 
+ Y manages X.
+ - Tell Y to get X.
+ - Y notifies its delegate when X is available.
+
+ Promises attempt to simplify this mess to look more like this:
+
+ When X is available, do Y.
+ 
+ doThisTutorial()
+   .then { haveAColdOne() }
+   .catch { postToForum(error) }
+ 
+ **
+ seal.fulfill: Fulfill the promise when the desired value is ready.
+ seal.reject: Reject the promise with an error, if one occurred.
+ seal.resolve: Resolve the promise with either an error or a value. In a way, `fulfill` and `reject` are prettified helpers around `resolve`.
+ **
+
+ 
+ */
+
+func brokenPromise<T>(method: String = #function) -> Promise<T> {
+    return Promise<T>() { seal in
+        let err = NSError(domain: "WeatherOrNot", code: 0,
+                          userInfo: [NSLocalizedDescriptionKey: "'\(method)' not yet implemented."])
+        seal.reject(err)
+    }
+}
+
+
+// Making promises
+
+func getWeather(
+  atLatitude latitude: Double,
+  longitude: Double
+) -> Promise<WeatherInfo> {
+  return Promise { seal in
+    let urlString = "http://api.openweathermap.org/data/2.5/weather?" +
+      "lat=\(latitude)&lon=\(longitude)&appid=\(appID)"
+    let url = URL(string: urlString)!
+
+    URLSession.shared.dataTask(with: url) { data, _, error in
+      guard let data = data,
+            let result = try? JSONDecoder().decode(WeatherInfo.self, from: data) else {
+        let genericError = NSError(
+          domain: "PromiseKitTutorial",
+          code: 0,
+          userInfo: [NSLocalizedDescriptionKey: "Unknown error"])
+        seal.reject(error ?? genericError)
+        return
+      }
+
+      seal.fulfill(result)
+    }.resume()
+  }
+}
+
+
+// Calling a promise
+
+private func handleLocation(
+  city: String?,
+  state: String?,
+  coordinate: CLLocationCoordinate2D
+) {
+  if let city = city,
+     let state = state {
+    self.placeLabel.text = "\(city), \(state)"
+  }
+    
+  weatherAPI.getWeather(
+    atLatitude: coordinate.latitude,
+    longitude: coordinate.longitude)
+  .done { [weak self] weatherInfo in
+    self?.updateUI(with: weatherInfo)
+  }
+  .catch { [weak self] error in
+    guard let self = self else { return }
+
+    self.tempLabel.text = "--"
+    self.conditionLabel.text = error.localizedDescription
+    self.conditionLabel.textColor = errorColor
+  }
+}
+
+
+//Using Promise Kit Wrappers
+
+func getWeather(
+  atLatitude latitude: Double,
+  longitude: Double
+) -> Promise<WeatherInfo> {
+  let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=" +
+    "\(latitude)&lon=\(longitude)&appid=\(appID)"
+  let url = URL(string: urlString)!
+  
+  return firstly {
+    URLSession.shared.dataTask(.promise, with: url)
+  }.compactMap {
+    return try JSONDecoder().decode(WeatherInfo.self, from: $0.data)
+  }
+}
+
+
