@@ -12,6 +12,7 @@
 		097F021F28C2E34500CE8A54 /* Concurrency-MultiThreading.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Concurrency-MultiThreading.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		09B2074628D1A26B00A1F872 /* Subscripts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Subscripts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		09B2074728D7524100A1F872 /* Thales-SG-Codility.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Thales-SG-Codility.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		09EBE583290F9F300012B034 /* SwiftUI.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftUI.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2054912B253AEFF0008CD55B /* FlowControl.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FlowControl.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		209EADC425301017005B3F7D /* Pallindrome.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pallindrome.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AA67CD59253EADE70067A94D /* Networking.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Networking.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -81,6 +82,7 @@
 				AAF844992536CD31000246FE /* Variables-Constants.playground */,
 				AAF844982534667A000246FE /* Closures.playground */,
 				097F021F28C2E34500CE8A54 /* Concurrency-MultiThreading.playground */,
+				09EBE583290F9F300012B034 /* SwiftUI.playground */,
 			);
 			path = SwiftConcepts;
 			sourceTree = "<group>";
