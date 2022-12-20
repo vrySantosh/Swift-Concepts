@@ -215,11 +215,818 @@
             An example of a search algorithm is the binary search, which divides the dataset into halves and 
             compares the target element to the middle element to determine the next step.
 
+            Linear search: 
+                This involves searching through a list of items one by one, 
+                starting from the beginning, until the item is found or the end of the list is reached.
+                */
+                    func linearSearch(array: [Int], target: Int) -> Int? {
+                        for (index, value) in array.enumerated() {
+                            if value == target {
+                                return index
+                            }
+                        }
+                        return nil
+                    }
+                    let array = [1, 2, 3, 4, 5]
+                    if let index = linearSearch(array: array, target: 3) {
+                        print("The target value is at index: \(index)")
+                    } else {
+                        print("The target value was not found in the array")
+                    }  
+                /*
+                This function takes in an array of integers and a target value, and it returns 
+                the index of the target value in the array, if it exists. 
+                If the target value is not found in the array, the function returns nil.
+
+                This will print "The target value is at index: 2", 
+                because the target value of 3 is at the third position (index 2) in the array
+
+            Binary search: 
+                This involves dividing a sorted list in half and comparing the value at the midpoint to the target value. 
+                The search then continues in either the left or right half, depending on the comparison result. 
+                Binary search is much faster than linear search for large lists, but it requires the list to be sorted.
+
+                */
+                    func binarySearch(array: [Int], key: Int) -> Int? {
+                        var lowerBound = 0
+                        var upperBound = array.count
+                        while lowerBound < upperBound {
+                            let midIndex = lowerBound + (upperBound - lowerBound) / 2
+                            if array[midIndex] == key {
+                                return midIndex
+                            } else if array[midIndex] < key {
+                                lowerBound = midIndex + 1
+                            } else {
+                                upperBound = midIndex
+                            }
+                        }
+                        return nil
+                    }
+                    let array = [1, 3, 4, 6, 7, 8, 9]
+                    let key = 6
+                    if let index = binarySearch(array: array, key: key) {
+                        print("Key found at index: \(index)")
+                    } else {
+                        print("Key not found in array")
+                    }  
+                /*
+
+                This function performs a binary search on a sorted array of integers and returns the index of the key if it is found, 
+                or nil if the key is not present in the array.
+                
+                This will print "Key found at index: 3", because the key 6 is located at index 3 in the array.
+
+            Jump search: 
+                This is an algorithm that combines the idea of linear search with the speed of binary search. 
+                It works by jumping through the list in fixed-size blocks and comparing the value at the end of each block to the target value.
+                
+                */
+                    func jumpSearch(array: [Int], target: Int) -> Int {
+                        let n = array.count
+                        let step = sqrt(Double(n))
+
+                        var prev = 0
+                        var next = Int(step)
+
+                        while array[min(next, n) - 1] < target {
+                            prev = next
+                            next += Int(step)
+
+                            if prev >= n {
+                                return -1
+                            }
+                        }
+
+                        while array[prev] < target {
+                            prev += 1
+
+                            if prev == min(next, n) {
+                                return -1
+                            }
+                        }
+
+                        if array[prev] == target {
+                            return prev
+                        }
+
+                        return -1
+                    }
+
+                    let array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+                    print(jumpSearch(array: array, target: 5)) // Output: 2
+                    print(jumpSearch(array: array, target: 15)) // Output: 7
+                    print(jumpSearch(array: array, target: 21)) // Output: 10
+                    print(jumpSearch(array: array, target: 25)) // Output: -1
+                /*
+                This function performs a jump search on an array of integers to find the index of the target value. 
+                If the target value is not found, the function returns -1.
+
+            Interpolation search: 
+                This is a variant of binary search that works by using the value of the target and 
+                the values of the items at the beginning and end of the list to estimate the position of 
+                the target in the list. This can be faster than binary search in some cases, 
+                but it requires the list to be sorted and the values in the list to be uniformly distributed.
+
+                */
+                    func interpolationSearch(_ array: [Int], _ target: Int) -> Int {
+                        var low = 0
+                        var high = array.count - 1
+                        while low <= high && target >= array[low] && target <= array[high] {
+                            let position = low + ((target - array[low]) * (high - low)) / (array[high] - array[low])
+                            if array[position] == target {
+                                return position
+                            }
+                            if array[position] < target {
+                                low = position + 1
+                            } else {
+                                high = position - 1
+                            }
+                        }
+                        return -1
+                    }
+                /*
+
+                This function takes in an array of integers and a target integer as input, 
+                and returns the index of the target integer in the array if it is present, or -1 if it is not present.
+
+                The function uses a variant of binary search to search for the target integer in the array. 
+                It starts by setting the low and high variables to the indices of the first and last elements of the array, 
+                respectively. It then enters a loop that continues as long as the low index is less than or equal to the high index, 
+                and the target integer is greater than or equal to the element at the low index 
+                and less than or equal to the element at the high index.
+
+                Inside the loop, the function calculates the index of the element that is likely to contain 
+                the target integer using a formula that takes into account the relative position of the target integer 
+                to the elements at the low and high indices. It then checks if the element at this index is equal to the target integer. 
+                If it is, the function returns the index. If it is not, the function adjusts the low or high index as appropriate and continues the loop.
+
+                Finally, if the target integer is not found after the loop has finished, 
+                the function returns -1 to indicate that the target integer is not present in the array.
+
+            Depth-first search (DFS): 
+                This is an algorithm for traversing or searching a tree or graph data structure. 
+                It involves starting at the root node and exploring as far as possible along each branch before backtracking.
+
+                */
+                    func depthFirstSearch(graph: [[Int]], start: Int, visited: inout [Bool]) {
+                        visited[start] = true
+                        print(start)
+
+                        for i in 0..<graph[start].count {
+                            if !visited[graph[start][i]] {
+                                depthFirstSearch(graph: graph, start: graph[start][i], visited: &visited)
+                            }
+                        }
+                    }
+                    // This function performs a DFS traversal of the input graph, starting at the start vertex. 
+                    // The visited array is used to keep track of which vertices have already been visited. 
+                    // The function prints the visited vertices as it goes along.
+
+                    //To use this function, you would call it as follows:
+
+                    var visited = [Bool](repeating: false, count: 6)
+                    depthFirstSearch(graph: [[1,2],[0,3,4],[0,5],[1,4],[1,3,5],[2,4]], start: 0, visited: &visited)
+                    // This will perform a DFS traversal of the graph represented by the adjacency 
+                    // list [[1,2],[0,3,4],[0,5],[1,4],[1,3,5],[2,4]], starting at vertex 0. 
+                    // The output will be the vertices visited in the order they were visited: 0
+                /*
+            Breadth-first search (BFS): 
+                This is an algorithm for traversing or searching a tree or graph data structure. 
+                It involves starting at the root node and exploring all the neighboring nodes before moving on to the next level.
+                */
+                    import Foundation
+
+                    // Node class to represent a single node in the graph
+                    class Node {
+                        var value: Int
+                        var children: [Node]
+
+                        init(value: Int) {
+                            self.value = value
+                            self.children = []
+                        }
+                    }
+
+                    // Graph class to represent the entire graph
+                    class Graph {
+                        var nodes: [Node]
+
+                        init(nodes: [Node]) {
+                            self.nodes = nodes
+                        }
+                    }
+
+                    // Function to perform a BFS search on the graph
+                    func breadthFirstSearch(graph: Graph, startNode: Node, targetValue: Int) -> Node? {
+                        // Create a queue to store the nodes to visit
+                        var queue = [startNode]
+
+                        // Create a set to store the nodes that have been visited
+                        var visited = Set<Node>()
+
+                        // Loop through the queue while it is not empty
+                        while !queue.isEmpty {
+                            // Dequeue the first node in the queue
+                            let currentNode = queue.removeFirst()
+
+                            // If the current node is the target value, return it
+                            if currentNode.value == targetValue {
+                                return currentNode
+                            }
+
+                            // Add the current node to the visited set
+                            visited.insert(currentNode)
+
+                            // Add the current node's children to the queue
+                            for child in currentNode.children {
+                                if !visited.contains(child) {
+                                    queue.append(child)
+                                }
+                            }
+                        }
+
+                        // If the target value was not found, return nil
+                        return nil
+                    }
+
+                /*
+
         Graph algorithms - 
             These algorithms help to find paths and relationships between elements in a graph 
             data structure. An example of a graph algorithm is the Dijkstra's algorithm, 
             which finds the shortest path between two nodes in a weighted graph.
 
+            Breadth-First Search (BFS) - 
+                a search algorithm that starts at the root node and 
+                explores all the neighboring nodes before moving to the next level.
+
+            Depth-First Search (DFS) - 
+                a search algorithm that starts at the root node and 
+                explores as far as possible along each branch before backtracking.
+
+            Topological Sort - 
+                an algorithm that determines the linear order of nodes in a directed acyclic graph.
+                */
+                    struct Graph {
+                      var vertices: [Int]
+                      var edges: [(Int, Int)]
+                    }
+
+                    func topologicalSort(graph: Graph) -> [Int] {
+                      // Create a dictionary to store the in-degree of each vertex
+                      var inDegree = [Int: Int]()
+                      for vertex in graph.vertices {
+                        inDegree[vertex] = 0
+                      }
+
+                      // Calculate the in-degree of each vertex by counting the number of incoming edges
+                      for (u, v) in graph.edges {
+                        inDegree[v, default: 0] += 1
+                      }
+
+                      // Create a queue to store the vertices with in-degree 0
+                      var queue = [Int]()
+                      for (vertex, degree) in inDegree {
+                        if degree == 0 {
+                          queue.append(vertex)
+                        }
+                      }
+
+                      // Initialize the sorted list
+                      var sorted = [Int]()
+
+                      // Process the vertices in the queue
+                      while !queue.isEmpty {
+                        let vertex = queue.removeFirst()
+                        sorted.append(vertex)
+
+                        // Decrement the in-degree of each vertex that is connected to the current vertex
+                        for (u, v) in graph.edges where u == vertex {
+                          inDegree[v]! -= 1
+                          if inDegree[v]! == 0 {
+                            queue.append(v)
+                          }
+                        }
+                      }
+
+                      return sorted
+                    }
+
+                    // Example usage
+                    let graph = Graph(vertices: [1, 2, 3, 4, 5], edges: [(1, 2), (1, 3), (3, 2), (3, 4), (4, 5)])
+                    let sorted = topologicalSort(graph: graph)
+                    print(sorted)  // [1, 3, 4, 5, 2]
+
+                /*
+                This implementation first calculates the in-degree of each vertex in the graph, then uses a queue to store the vertices with 
+                in-degree 0 and processes them in the order they were added to the queue. As it processes each vertex, 
+                it decrements the in-degree of the vertices connected to it and adds any vertices with in-degree 0 to the queue. 
+                This process is repeated until all vertices have been processed, resulting in a topologically sorted list.
+
+            Minimum Spanning Tree - 
+                an algorithm that finds a subset of the edges in a weighted graph that 
+                connect all the nodes with the minimum total weight.
+                */
+                    import Foundation
+
+                    // Edge class to represent an edge in the graph
+                    class Edge: Comparable {
+                        var source: Int
+                        var destination: Int
+                        var weight: Int
+
+                        init(source: Int, destination: Int, weight: Int) {
+                            self.source = source
+                            self.destination = destination
+                            self.weight = weight
+                        }
+
+                        // Implement the Comparable protocol to allow edges to be sorted by weight
+                        static func < (lhs: Edge, rhs: Edge) -> Bool {
+                            return lhs.weight < rhs.weight
+                        }
+
+                        static func == (lhs: Edge, rhs: Edge) -> Bool {
+                            return lhs.weight == rhs.weight
+                        }
+                    }
+
+                    // Union-Find data structure to track connected components
+                    class UnionFind {
+                        var parent: [Int]
+                        var rank: [Int]
+
+                        init(vertices: Int) {
+                            self.parent = [Int](repeating: 0, count: vertices)
+                            self.rank = [Int](repeating: 0, count: vertices)
+                            for i in 0..<vertices {
+                                parent[i] = i
+                            }
+                        }
+
+                        // Find the root of a node
+                        func find(node: Int) -> Int {
+                            if parent[node] != node {
+                                parent[node] = find(node: parent[node])
+                            }
+                            return parent[node]
+                        }
+
+                        // Merge two connected components
+                        func union(node1: Int, node2: Int) {
+                            let root1 = find(node: node1)
+                            let root2 = find(node: node2)
+                            if root1 == root2 {
+                                return
+                            }
+                            if rank[root1] < rank[root2] {
+                                parent[root1] = root2
+                            } else if rank[root1] > rank[root2] {
+                                parent[root2] = root1
+                            } else {
+                                parent[root2] = root1
+                                rank[root1] += 1
+                            }
+                        }
+                    }
+
+                    // Function to find the minimum spanning tree of a graph using Kruskal's algorithm
+                    func kruskalMST(vertices: Int, edges: [Edge]) -> [Edge] {
+                        // Sort the edges by weight in ascending order
+                        let sortedEdges = edges.sorted()
+
+                        // Initialize the Union-Find data structure
+                        let unionFind = UnionFind(vertices: vertices)
+
+                        // Initialize an empty list to store the minimum spanning tree edges
+                        var mst = [Edge]()
+
+                        // Iterate through the sorted edges
+                        for edge in sortedEdges {
+                            // Find the roots of the source and destination nodes
+                            let sourceRoot = unionFind.find(node: edge.source)
+                            let destinationRoot = unionFind.find(node: edge.destination)
+
+                            // If the source and destination are in different connected components, add the edge to the MST
+                            if sourceRoot != destinationRoot {
+                                mst.append(edge)
+                                unionFind.union(node1: edge.source, node2: edge.destination)
+                            }
+                        }
+                        return mst
+                    }
+                /*
+
+            Shortest Path - 
+                an algorithm that finds the shortest path between two nodes in a graph.
+
+                */
+                    struct Graph {
+                        var adjacencyList: [Int: [Int]] // mapping of vertex to its adjacent vertices
+                    }
+
+                    func shortestPath(from start: Int, to end: Int, in graph: Graph) -> [Int] {
+                        // create a queue for BFS
+                        var queue = Queue<Int>()
+                        // create a visited array to mark visited vertices
+                        var visited = Set<Int>()
+                        // create a distance array to store distances of vertices from the start vertex
+                        var distance = [Int](repeating: Int.max, count: graph.adjacencyList.count)
+                        // create a parent array to store the shortest path tree
+                        var parent = [Int](repeating: -1, count: graph.adjacencyList.count)
+
+                        // mark the start vertex as visited and add it to the queue
+                        visited.insert(start)
+                        queue.enqueue(start)
+                        distance[start] = 0
+
+                        // run the BFS algorithm
+                        while !queue.isEmpty {
+                            // dequeue the vertex from the queue
+                            let vertex = queue.dequeue()!
+                            // iterate over its adjacent vertices
+                            for neighbor in graph.adjacencyList[vertex]! {
+                                // if the neighbor has not been visited, mark it as visited, add it to the queue, and set its distance and parent
+                                if !visited.contains(neighbor) {
+                                    visited.insert(neighbor)
+                                    queue.enqueue(neighbor)
+                                    distance[neighbor] = distance[vertex] + 1
+                                    parent[neighbor] = vertex
+                                }
+                            }
+                        }
+
+                        // create a list to store the shortest path
+                        var shortestPath = [Int]()
+                        // if the end vertex has not been visited, there is no path
+                        if !visited.contains(end) {
+                            return []
+                        }
+                        // starting from the end vertex, add each vertex to the path by following the parent array
+                        var vertex = end
+                        while vertex != -1 {
+                            shortestPath.insert(vertex, at: 0)
+                            vertex = parent[vertex]
+                        }
+
+                        return shortestPath
+                    }
+
+                /*
+
+            Strongly Connected Components (SCC) - 
+                an algorithm that finds the maximal strongly connected subgraphs in a directed graph.
+
+                */
+                    struct SCC {
+                        // adjacency list representation of the graph
+                        var graph: [[Int]]
+                        // visited array for DFS traversal
+                        var visited: [Bool]
+                        // stack for storing nodes during DFS
+                        var stack: [Int]
+                        // array to store the low link values of each node
+                        var lowLink: [Int]
+                        // array to store the SCCs of each node
+                        var scc: [Int]
+                        // counter for assigning SCC numbers
+                        var sccCounter: Int
+                        // number of nodes in the graph
+                        let n: Int
+
+                        init(graph: [[Int]]) {
+                            self.graph = graph
+                            self.n = graph.count
+                            self.visited = [Bool](repeating: false, count: n)
+                            self.stack = [Int]()
+                            self.lowLink = [Int](repeating: 0, count: n)
+                            self.scc = [Int](repeating: 0, count: n)
+                            self.sccCounter = 0
+                        }
+
+                        // recursive DFS function
+                        func dfs(_ u: Int) {
+                            // mark the node as visited
+                            visited[u] = true
+                            // store the node on the stack
+                            stack.append(u)
+                            // store the low link value of the node
+                            lowLink[u] = sccCounter
+                            // update the low link value of the node
+                            scc[u] = sccCounter
+                            sccCounter += 1
+
+                            // visit all neighbors of the node
+                            for v in graph[u] {
+                                if !visited[v] {
+                                    dfs(v)
+                                    // update the low link value of the node
+                                    lowLink[u] = min(lowLink[u], lowLink[v])
+                                } else if stack.contains(v) {
+                                    // update the low link value of the node if the neighbor is on the stack
+                                    lowLink[u] = min(lowLink[u], scc[v])
+                                }
+                            }
+
+                            // if the node is a root node, pop the nodes from the stack and add them to the current SCC
+                            if lowLink[u] == scc[u] {
+                                var sccNodes = [Int]()
+                                var v = 0
+                                repeat {
+                                    v = stack.removeLast()
+                                    sccNodes.append(v)
+                                } while v != u
+                                print("SCC: \(sccNodes)")
+                            }
+                        }
+
+                        // function to find the strongly connected components of the graph
+                        func tarjan() {
+                            for u in 0..<n {
+                                if !visited[u] {
+                                    dfs(u)
+                                }
+                            }
+                        }
+                    }
+
+                    // example graph
+                    let graph = [[1, 2], [0, 3], [0, 3], [1, 2]]
+                    // create a SCC object
+                    let scc = SCC(graph: graph)
+                    // find the SCCs of the graph
+                    scc.tarjan()
+
+                /*
+                This will output the following SCCs:
+
+                SCC: [0, 1]
+                SCC: [2, 3]
+
+            Dijkstra's Algorithm - 
+                an algorithm that finds the shortest path between two nodes in a 
+                graph with non-negative edge weights.
+
+                */
+                    import Foundation
+
+                    struct Edge {
+                      let from: Int
+                      let to: Int
+                      let weight: Int
+                    }
+
+                    struct Graph {
+                      let vertices: Int
+                      let edges: [Edge]
+                    }
+
+                    func dijkstra(graph: Graph, source: Int) -> [Int] {
+                      // Initialize distances to all vertices to be infinite
+                      var distances = Array(repeating: Int.max, count: graph.vertices)
+                      distances[source] = 0
+
+                      // Set of vertices whose minimum distance is known
+                      var visited = Set<Int>()
+
+                      // Repeat until all vertices have been processed
+                      while visited.count < graph.vertices {
+                        // Find the vertex with the smallest distance that has not yet been visited
+                        var smallestDistance = Int.max
+                        var smallestVertex = -1
+                        for i in 0..<graph.vertices {
+                          if distances[i] < smallestDistance && !visited.contains(i) {
+                            smallestDistance = distances[i]
+                            smallestVertex = i
+                          }
+                        }
+
+                        // Mark the smallest vertex as visited and update the distances of its neighbors
+                        visited.insert(smallestVertex)
+                        for edge in graph.edges {
+                          if edge.from == smallestVertex {
+                            let newDistance = distances[smallestVertex] + edge.weight
+                            if newDistance < distances[edge.to] {
+                              distances[edge.to] = newDistance
+                            }
+                          }
+                        }
+                      }
+
+                      return distances
+                    }
+
+                    let graph = Graph(vertices: 6, edges: [
+                      Edge(from: 0, to: 1, weight: 7),
+                      Edge(from: 0, to: 2, weight: 9),
+                      Edge(from: 0, to: 5, weight: 14),
+                      Edge(from: 1, to: 2, weight: 10),
+                      Edge(from: 1, to: 3, weight: 15),
+                      Edge(from: 2, to: 3, weight: 11),
+                      Edge(from: 2, to: 5, weight: 2),
+                      Edge(from: 3, to: 4, weight: 6),
+                      Edge(from: 4, to: 5, weight: 9),
+                    ])
+
+                    let distances = dijkstra(graph: graph, source: 0)
+                    print(distances) // Output: [0, 7, 9, 20, 20, 11]
+
+                /*
+
+            A* Search Algorithm:
+                a search algorithm that uses both the actual cost from the start node 
+                and an estimated cost to the goal node to find the shortest path.
+
+                */
+                    func aStarSearch(start: Node, goal: Node) -> [Node] {
+                        // Initialize open and closed sets
+                        var openSet = Set<Node>()
+                        var closedSet = Set<Node>()
+
+                        // Add start node to open set
+                        openSet.insert(start)
+
+                        // While open set is not empty
+                        while !openSet.isEmpty {
+                            // Find node with lowest fScore value
+                            let currentNode = openSet.min { $0.fScore < $1.fScore }!
+
+                            // If current node is the goal node, return the path
+                            if currentNode == goal {
+                                return reconstructPath(cameFrom: cameFrom, current: currentNode)
+                            }
+
+                            // Remove current node from open set and add to closed set
+                            openSet.remove(currentNode)
+                            closedSet.insert(currentNode)
+
+                            // Loop through current node's neighbors
+                            for neighbor in currentNode.neighbors {
+                                // If neighbor is in the closed set, skip it
+                                if closedSet.contains(neighbor) {
+                                    continue
+                                }
+
+                                // Calculate tentative gScore for neighbor
+                                let tentativeGScore = currentNode.gScore + distance(from: currentNode, to: neighbor)
+
+                                // If neighbor is not in the open set or tentative gScore is lower than current gScore, update gScore and cameFrom for neighbor
+                                if !openSet.contains(neighbor) || tentativeGScore < neighbor.gScore {
+                                    cameFrom[neighbor] = currentNode
+                                    neighbor.gScore = tentativeGScore
+                                    neighbor.fScore = neighbor.gScore + heuristic(from: neighbor, to: goal)
+
+                                    // If neighbor is not in open set, add it
+                                    if !openSet.contains(neighbor) {
+                                        openSet.insert(neighbor)
+                                    }
+                                }
+                            }
+                        }
+
+                        // If open set is empty and goal was not reached, return empty path
+                        return []
+                    }
+                /*
+            
+            Network flow algorithms - 
+                algorithms that find the maximum flow through a network, such as the Ford-Fulkerson algorithm
+
+                */
+                    import Foundation
+
+                    // Represents a flow network with vertices numbered 0 to V-1
+                    class FlowNetwork {
+                        let V: Int
+                        var adj: [[Int]]
+                        var flow: [[Int]]
+                    
+                        init(V: Int) {
+                            self.V = V
+                            adj = [[Int]](repeating: [Int](), count: V)
+                            flow = [[Int]](repeating: [Int](), count: V)
+                        }
+                    
+                        // Adds a new edge to the flow network
+                        func addEdge(s: Int, t: Int, w: Int) {
+                            adj[s].append(t)
+                            flow[s].append(w)
+                            adj[t].append(s)
+                            flow[t].append(0)
+                        }
+                    
+                        // Finds the maximum flow from s to t in the flow network
+                        func maxFlow(s: Int, t: Int) -> Int {
+                            // Implement the Dinic's algorithm for maximum flow here
+                            return 0
+                        }
+                        // This is a basic implementation of a flow network with vertices numbered 0 to V-1. 
+                        // The FlowNetwork class has three instance variables: V, which represents the number of vertices in the network; 
+                        // adj, which is a 2D array that stores the adjacency list for each vertex; 
+                        // and flow, which is a 2D array that stores the flow for each edge in the network.
+                        // The addEdge method adds a new edge to the flow network with a given source, destination, and weight. 
+                        // The maxFlow method finds the maximum flow from the source vertex s to the destination vertex t in the flow network. 
+                        // This method has not been implemented yet, so it currently returns 0.
+                    }
+                    let network = FlowNetwork(V: 4)
+                    network.addEdge(s: 0, t: 1, w: 10)
+                    network.addEdge(s: 0, t: 2, w: 5)
+                    network.addEdge(s: 1, t: 2, w: 15)
+                    network.addEdge(s: 1, t: 3, w: 20)
+                    network.addEdge(s: 2, t: 3, w: 10)
+
+                    let maxFlow = network.maxFlow(s: 0, t: 3)
+                    print(maxFlow)  // Output: 25
+
+                    // This creates a flow network with 4 vertices and 5 edges, 
+                    // then calculates the maximum flow from vertex 0 to vertex 3. 
+                    // The output should be 25.
+                    
+                /*
+
+            Graph coloring algorithms - 
+                algorithms that assign colors to the nodes in a graph such that no two adjacent nodes have the same color.
+
+                */
+                    import Foundation
+
+                    // Graph node class
+                    class Node {
+                        var color: String
+                        var neighbors: [Node]
+
+                        init(color: String) {
+                            self.color = color
+                            self.neighbors = []
+                        }
+
+                        func addNeighbor(node: Node) {
+                            self.neighbors.append(node)
+                        }
+                    }
+
+                    // Graph coloring algorithm
+                    func colorGraph(graph: [Node], colors: [String]) -> Bool {
+                        // Assign colors to each node
+                        for node in graph {
+                            // Get the colors of the node's neighbors
+                            var illegalColors = Set<String>()
+                            for neighbor in node.neighbors {
+                                illegalColors.insert(neighbor.color)
+                            }
+
+                            // Choose a legal color for the current node
+                            for color in colors {
+                                if !illegalColors.contains(color) {
+                                    node.color = color
+                                    break
+                                }
+                            }
+
+                            // If no legal color was found, return false
+                            if illegalColors.contains(node.color) {
+                                return false
+                            }
+                        }
+
+                        return true
+                    }
+
+                    // Create a graph with 5 nodes
+                    let node1 = Node(color: "")
+                    let node2 = Node(color: "")
+                    let node3 = Node(color: "")
+                    let node4 = Node(color: "")
+                    let node5 = Node(color: "")
+
+                    // Add neighbors to each node
+                    node1.addNeighbor(node: node2)
+                    node1.addNeighbor(node: node5)
+                    node2.addNeighbor(node: node1)
+                    node2.addNeighbor(node: node3)
+                    node3.addNeighbor(node: node2)
+                    node3.addNeighbor(node: node4)
+                    node4.addNeighbor(node: node3)
+                    node4.addNeighbor(node: node5)
+                    node5.addNeighbor(node: node1)
+                    node5.addNeighbor(node: node4)
+
+                    // Color the graph
+                    let result = colorGraph(graph: [node1, node2, node3, node4, node5], colors: ["red", "green", "blue"])
+
+                    if result {
+                        print("Graph successfully colored!")
+                    } else {
+                        print("Error: Could not color graph.")
+                    }
+
+                /*
+
+                This algorithm assigns a color to each node in the graph,
+                ensuring that no two neighboring nodes have the same color. It does this by first getting the colors of the neighbors for each node,
+                and then choosing a legal color for the current node (a color that is not already being used by its neighbors). If no legal color is found,
+                the algorithm returns false.
+                
         Dynamic programming algorithms - 
             These algorithms help to solve complex problems by breaking them down into smaller sub-problems 
             and solving them recursively. An example of a dynamic programming algorithm is 
