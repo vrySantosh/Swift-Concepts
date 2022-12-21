@@ -1026,11 +1026,264 @@
                 ensuring that no two neighboring nodes have the same color. It does this by first getting the colors of the neighbors for each node,
                 and then choosing a legal color for the current node (a color that is not already being used by its neighbors). If no legal color is found,
                 the algorithm returns false.
-                
+
         Dynamic programming algorithms - 
+
             These algorithms help to solve complex problems by breaking them down into smaller sub-problems 
             and solving them recursively. An example of a dynamic programming algorithm is 
             the Knapsack problem, which finds the optimal combination of items to include in a knapsack with limited capacity.
+
+            Memoization: 
+                This is a technique in which we store the results of previously solved subproblems in a lookup table,
+                so we can avoid recalculating them in the future.
+
+                */
+                    // A cache to store previously computed results
+                    var cache = [Int: Int]()
+
+                    func fibonacci(_ n: Int) -> Int {
+                      // If the value has already been computed, return it from the cache
+                      if let result = cache[n] {
+                        return result
+                      }
+
+                      // Otherwise, compute the value and store it in the cache
+                      let result: Int
+                      if n < 2 {
+                        result = n
+                      } else {
+                        result = fibonacci(n - 1) + fibonacci(n - 2)
+                      }
+                      cache[n] = result
+                      return result
+                    }
+
+                /*
+
+                This function calculates the nth number in the Fibonacci sequence,
+                using memoization to store previously computed values in the cache dictionary. When the function is called with a value of n that has already been computed,
+                it returns the value from the cache instead of recalculating it. This can significantly improve the performance of the function,
+                especially for larger values of n.
+
+            Bottom-up approach: 
+
+                This is a technique in which we start with the base case and work our way up to the final solution,
+                building the solution step by step.
+                
+                */
+                    func bottomUpFibonacci(n: Int) -> Int {
+                      if n <= 1 {
+                        return n
+                      }
+
+                      var previous = 0
+                      var current = 1
+
+                      for i in 2...n {
+                        let sum = previous + current
+                        previous = current
+                        current = sum
+                      }
+
+                      return current
+                    }
+
+                /*
+
+                This algorithm calculates the n-th number in the Fibonacci sequence using a bottom-up approach. 
+                The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding ones,
+                usually starting with 0 and 1.
+
+                The algorithm first checks if the input number n is less than or equal to 1, and if it is,
+                it returns n as the result. Otherwise, it initializes two variables,
+                previous and current, with the values 0 and 1,
+                respectively. These variables will be used to store the previous and current numbers in the sequence as we iterate through the loop.
+
+                Next,the algorithm starts a loop that runs from 2 to n,and in each iteration,
+                it calculates the sum of the previous and current variables and stores it in a temporary variable called sum. 
+                It then updates the values of previous and current to be the previous value of current and the current value of sum,
+                respectively.
+
+                Finally, after the loop has completed,
+                the algorithm returns the value of current as the result. 
+                This will be the n-th number in the Fibonacci sequence.
+
+            Top-down approach: 
+
+                This is a technique in which we start with the final solution and work our way down to the base case,
+                 breaking the problem down into smaller subproblems.
+
+                 */
+                    // A function that calculates the sum of the digits of a given number using a top-down approach
+                    func sumOfDigits(num: Int) -> Int {
+                      // Base case: if the number is less than 10, return the number itself
+                      if num < 10 {
+                        return num
+                      }
+                      // Otherwise, divide the number by 10 and add the remainder to the sum of the digits of the quotient
+                      return num % 10 + sumOfDigits(num: num / 10)
+                    }
+                    
+                    // Test the function
+                    print(sumOfDigits(num: 12345))  // Output: 15
+                 /*
+
+            Divide and conquer: 
+
+                This is a technique in which we divide the problem into smaller subproblems,
+                solve them separately,
+                and then combine the results to get the final solution.
+
+                */
+                    func findMaximum(array: [Int]) -> Int {
+                      // base case: if the array has only one element, return that element
+                      if array.count == 1 {
+                        return array[0]
+                      }
+                    
+                      // divide the array into two halves
+                      let middleIndex = array.count / 2
+                      let leftHalf = Array(array[0..<middleIndex])
+                      let rightHalf = Array(array[middleIndex..<array.count])
+                    
+                      // conquer: find the maximum element in each half
+                      let maxLeft = findMaximum(array: leftHalf)
+                      let maxRight = findMaximum(array: rightHalf)
+                    
+                      // combine: return the maximum of the two maximums
+                      return max(maxLeft, maxRight)
+                    }
+                    
+                    // example usage
+                    let array = [3, 6, 2, 9, 1, 5]
+                    let max = findMaximum(array: array)
+                    print(max)  // prints "9"
+                    
+                /*
+                
+
+            Greedy algorithm: 
+
+                This is a technique in which we make the locally optimal choice at each step,
+                hoping to find a global optimal solution.
+                
+                */
+                    let coins = [1, 5, 10, 25]  // available coin denominations
+                    let amount = 37  // amount of money to make
+                    
+                    var numCoins = 0  // variable to store the number of coins needed
+                    var remainingAmount = amount  // variable to store the remaining amount
+                    
+                    // sort the coins in descending order
+                    coins.sort(by: >)
+                    
+                    // iterate through the coin denominations
+                    for coin in coins {
+                      // add coins to the count until the coin is less than or equal to the remaining amount
+                      while coin <= remainingAmount {
+                        numCoins += 1
+                        remainingAmount -= coin
+                      }
+                    }
+                    
+                    print("Minimum number of coins needed: \(numCoins)")  // output: Minimum number of coins needed: 3
+                    
+                /*
+                This algorithm works by iterating through the available coin denominations in descending order and adding
+                coins to the count until the coin is less than or equal to the remaining amount. 
+                This approach ensures that the minimum number of coins are used to make the desired amount of money.
+
+            Branch and bound: 
+
+                This is a technique in which we use a heuristic to prune the search space and reduce the number of subproblems we need to solve.
+
+                */
+                    import Foundation
+
+                    // Define the problem to be solved
+                    struct Problem {
+                      // Define the variables and constraints for the problem
+                    }
+                    
+                    // Define a class to represent a solution to the problem
+                    class Solution {
+                      // Initialize the solution with the problem and a feasible starting point
+                      init(problem: Problem, startingPoint: [Int]) {
+                        // Set the initial solution to the starting point
+                      }
+                    
+                      // Implement a function to calculate the value of the solution
+                      func value() -> Int {
+                        // Calculate the value of the solution using the variables and constraints
+                      }
+                    
+                      // Implement a function to generate the children of the current solution
+                      func children() -> [Solution] {
+                        // Generate the children by modifying the variables of the current solution
+                      }
+                    
+                      // Implement a function to check if the solution is valid
+                      func isValid() -> Bool {
+                        // Check if the solution satisfies all of the constraints of the problem
+                      }
+                    }
+                    
+                    // Define a class to represent a node in the branch and bound tree
+                    class Node {
+                      // Initialize the node with a solution and a bound
+                      init(solution: Solution, bound: Int) {
+                        // Set the solution and bound for the node
+                      }
+                    
+                      // Implement a function to compare two nodes based on their bounds
+                      static func < (lhs: Node, rhs: Node) -> Bool {
+                        // Compare the bounds of the two nodes
+                      }
+                    }
+                    
+                    // Define a function to perform the branch and bound algorithm
+                    func branchAndBound(problem: Problem) -> Solution {
+                      // Create a priority queue to store the nodes of the tree
+                      var queue = PriorityQueue<Node>()
+                    
+                      // Create a starting solution and node
+                      let startingSolution = Solution(problem: problem, startingPoint: [0, 0, 0])
+                      let startingNode = Node(solution: startingSolution, bound: startingSolution.value())
+                    
+                      // Add the starting node to the queue
+                      queue.push(startingNode)
+                    
+                      // Set the best solution to the starting solution
+                      var bestSolution = startingSolution
+                    
+                      // Loop until the queue is empty
+                      while !queue.isEmpty {
+                        // Get the next node from the queue
+                        let node = queue.pop()
+                        let solution = node.solution
+                    
+                        // If the solution is better than the current best solution, update the best solution
+                        if solution.value() > bestSolution.value() {
+                          bestSolution = solution
+                        }
+                    
+                        // Generate the children of the current solution
+                        let children = solution.children()
+                    
+                        // Add the children to the queue if they are valid and have a bound greater than the current best solution
+                        for child in children {
+                          if child.isValid() && child.value() > bestSolution.value() {
+                            let childNode = Node(solution: child, bound: child.value())
+                            queue.push(childNode)
+                          }
+                        }
+                      }
+                    
+                      // Return the best solution
+                      return bestSolution
+                    }
+                    
+                /*
 
         Machine learning algorithms - 
             These algorithms use data and training examples to make predictions and decisions. 
