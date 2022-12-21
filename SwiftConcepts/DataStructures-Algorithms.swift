@@ -1,36 +1,37 @@
-/* Data Structures
-    
-    Array - an ordered collection of values, accessed by index. For example:
+// Data Structures 
+
+    */    
+    // Array - an ordered collection of values, accessed by index. For example:
         let colors = ["red", "green", "blue"]
 
-    Set - an unordered collection of unique values. For example:
+    // Set - an unordered collection of unique values. For example:
         let uniqueNumbers = Set([1, 2, 3, 3, 4])
 
-    Dictionary - a collection of key-value pairs, where keys are used to access values. For example:
+    // Dictionary - a collection of key-value pairs, where keys are used to access values. For example:
         let ages = ["John": 25, "Jane": 30, "Bob": 40]
 
-    Tuple - a fixed-size collection of values of different types, accessed by position. For example:
+    // Tuple - a fixed-size collection of values of different types, accessed by position. For example:
         let person = (name: "John", age: 25)
 
-    Stack - a data structure that follows the Last In First Out (LIFO) principle, where the last element added to the stack is the first one to be removed. For example:
+    // Stack - a data structure that follows the Last In First Out (LIFO) principle, where the last element added to the stack is the first one to be removed. For example:
         var numberStack = Stack<Int>()
         numberStack.push(1)
         numberStack.push(2)
         numberStack.pop() // returns 2
 
-    Queue - a data structure that follows the First In First Out (FIFO) principle, where the first element added to the queue is the first one to be removed. For example:
+    // Queue - a data structure that follows the First In First Out (FIFO) principle, where the first element added to the queue is the first one to be removed. For example:
         var numberQueue = Queue<Int>()
         numberQueue.enqueue(1)
         numberQueue.enqueue(2)
         numberQueue.dequeue() // returns 1
 
-    Linked List - a data structure where each element is connected to the next element through a reference, allowing for efficient insertion and deletion operations. For example:
+    // Linked List - a data structure where each element is connected to the next element through a reference, allowing for efficient insertion and deletion operations. For example:
         var linkedList = LinkedList<Int>()
         linkedList.append(1)
         linkedList.append(2)
         linkedList.remove(at: 1) // removes the second element
 
-    Tree - a data structure that organizes data in a hierarchical structure, where each element (except the root) has a parent and may have multiple children. For example:
+    // Tree - a data structure that organizes data in a hierarchical structure, where each element (except the root) has a parent and may have multiple children. For example:
         let tree = TreeNode<String>("Food")
         let fruits = TreeNode<String>("Fruits")
         let vegetables = TreeNode<String>("Vegetables")
@@ -38,7 +39,6 @@
         tree.add(vegetables)
         tree.children[0].add(TreeNode<String>("Apple"))
         tree.children[1].add(TreeNode<String>("Carrot"))
-*/
 
 /* Algorithms 
 
@@ -1286,12 +1286,466 @@
                 /*
 
         Machine learning algorithms - 
+
             These algorithms use data and training examples to make predictions and decisions. 
             An example of a machine learning algorithm is the k-nearest neighbors algorithm, 
             which classifies data points based on their similarity to other points in the dataset.
-*/
 
 
-/* Time Complexity 
+            Supervised learning algorithms:
 
+                These algorithms learn from labeled training data,
+                where the desired output is already known. Examples include linear regression,
+                logistic regression,
+                and support vector machines (SVMs).
+
+                */
+                    import Foundation
+                    import CoreML
+
+                    // Define the structure for the input data
+                    struct InputData: Codable {
+                        var feature1: Double
+                        var feature2: Double
+                        var feature3: Double
+                    }
+
+                    // Define the structure for the output data
+                    struct OutputData: Codable {
+                        var classLabel: String
+                    }
+
+                    // Define the structure for the training data
+                    struct TrainingData: Codable {
+                        var input: InputData
+                        var output: OutputData
+                    }
+
+                    // Load the training data from a JSON file
+                    let trainingData: [TrainingData] = ...
+
+                    // Define the model
+                    struct Model: Codable, MLModel {
+                        var model: MLModel
+
+                        init(input: InputData) throws {
+                            model = try LinearRegression(input: input)
+                        }
+
+                        func prediction(input: InputData) throws -> OutputData {
+                            let prediction = try model.prediction(input: input)
+                            return OutputData(classLabel: prediction.classLabel)
+                        }
+                    }
+
+                    // Train the model
+                    let model = try Model(input: trainingData)
+
+                    // Use the model to make predictions
+                    let input = InputData(feature1: 0.5, feature2: 0.3, feature3: 0.2)
+                    let output = try model.prediction(input: input)
+                    print(output.classLabel)
+                /*
+
+                This example defines a simple linear regression model using the LinearRegression class from Core ML,
+                which is Apple's framework for implementing machine learning models on iOS, macOS, watchOS, and tvOS. 
+                The model is trained on a dataset of input-output pairs, where the input consists of 
+                three features (feature1, feature2, and feature3) and the output is a class label. 
+                Once the model is trained, it can be used to make predictions on new input data by calling the prediction method.
+
+            Unsupervised learning algorithms:
+
+                These algorithms learn from unlabeled data,
+                meaning the desired output is not known. Examples include k-means clustering and principal component analysis (PCA).
+
+                */
+                    import Foundation
+                    import TensorFlow
+
+                    // Perform K-Means clustering on a set of 2D data points
+
+                    // Set the number of clusters
+                    let K = 3
+
+                    // Generate some random data points
+                    let data = Tensor<Float>([[1, 2], [2, 3], [3, 1], [1, 3], [2, 2], [3, 3], [4, 1], [4, 3], [4, 2]])
+
+                    // Initialize the cluster centroids randomly
+                    let initialCentroids = Tensor<Float>([[1, 2], [3, 3], [4, 2]])
+
+                    // Define a function to calculate the distance between two points
+                    func distance(_ a: Tensor<Float>, _ b: Tensor<Float>) -> Float {
+                        let diff = a - b
+                        return sqrt(diff.squared().sum().scalarized())
+                    }
+
+                    // Define a function to assign each data point to the closest centroid
+                    func assignToClosestCentroid(_ data: Tensor<Float>, _ centroids: Tensor<Float>) -> Tensor<Int32> {
+                        let expandedCentroids = centroids.expandingShape(at: 1)
+                        let differences = expandedCentroids - data
+                        let distances = differences.squared().sum(squeezingAxes: 1).sqrt()
+                        return distances.argmin(squeezingAxis: 1)
+                    }
+
+                    // Define a function to calculate the new centroids as the mean of the data points assigned to them
+                    func updateCentroids(_ data: Tensor<Float>, _ assignments: Tensor<Int32>) -> Tensor<Float> {
+                        var newCentroids = Tensor<Float>(zeros: [K, 2])
+                        var counts = Tensor<Int32>(zeros: [K])
+                        for i in 0..<data.shape[0] {
+                            let point = data[i]
+                            let assignment = assignments[i]
+                            newCentroids[assignment] += point
+                            counts[assignment] += 1
+                        }
+                        return newCentroids / Tensor<Float>(counts).expandingShape(at: 1)
+                    }
+
+                    // Define the maximum number of iterations
+                    let maxIterations = 10
+
+                    // Initialize the centroids and assignments
+                    var centroids = initialCentroids
+                    var assignments = assignToClosestCentroid(data, centroids)
+
+                    // Iterate until the centroids stop changing or the maximum number of iterations is reached
+                    for _ in 0..<maxIterations {
+                        let newCentroids = updateCentroids(data, assignments)
+                        if distance(centroids, newCentroids).isLess(than: 1e-5) {
+                            // The centroids have stopped changing, so we have converged
+                            break
+                        }
+                        centroids = newCentroids
+                        assignments = assignToClosestCentroid(data, centroids)
+                    }
+
+                    // Print the final centroids and assignments
+                    print("Centroids:")
+                    print(centroids)
+                    print("Assignments:")
+                    print(assignments)
+                /*
+                This code performs K-Means clustering on a set of 2
+
+            Semi-supervised learning algorithms:
+
+                These algorithms learn from a mixture of labeled and unlabeled data.
+
+                */
+                    import Foundation
+                    import TensorFlow
+
+                    struct SemiSupervisedClassifier {
+                        // Create a model with two fully connected layers and a softmax output layer
+                        var model = Sequential {
+                            Dense(inputSize: 2, outputSize: 32, activation: relu)
+                            Dense(inputSize: 32, outputSize: 32, activation: relu)
+                            Dense(inputSize: 32, outputSize: 2, activation: softmax)
+                        }
+
+                        // Create an optimizer for training the model
+                        let optimizer = Adam(for: model)
+
+                        // Train the model on a labeled dataset and an unlabeled dataset
+                        func fit(labeledData: Tensor<Float>, labeledLabels: Tensor<Int32>,
+                                 unlabeledData: Tensor<Float>) {
+                            // Loop through the training epochs
+                            for epoch in 1...10 {
+                                // Shuffle the labeled data
+                                let shuffledIndices = (0..<labeledLabels.shape[0]).shuffled()
+                                let shuffledLabeledData = labeledData[shuffledIndices]
+                                let shuffledLabeledLabels = labeledLabels[shuffledIndices]
+
+                                // Loop through the labeled data in mini-batches
+                                for batch in shuffledLabeledData.batched(batchSize: 32) {
+                                    let (labels, logits) = model(batch).output
+                                    let loss = softmaxCrossEntropy(logits: logits, labels: labels)
+
+                                    // Calculate the gradients and update the model's parameters
+                                    optimizer.update(&model.allDifferentiableVariables, along: loss.gradient)
+                                }
+
+                                // Loop through the unlabeled data in mini-batches
+                                for batch in unlabeledData.batched(batchSize: 32) {
+                                    // Calculate the logits for the unlabeled data
+                                    let logits = model(batch).output
+
+                                    // Calculate the consistency loss based on the logits and the model's predictions
+                                    // on the same data in the previous epoch
+                                    let consistencyLoss = consistencyLoss(logits: logits, previousPredictions: previousPredictions)
+
+                                    // Calculate the gradients and update the model's parameters
+                                    optimizer.update(&model.allDifferentiableVariables, along: consistencyLoss.gradient)
+                                }
+                            }
+                        }
+
+                        // Calculate the consistency loss based on the logits and the model's predictions on the same data in the previous epoch
+                        func consistencyLoss(logits: Tensor<Float>, previousPredictions: Tensor<Float>) -> Tensor<Float> {
+                            // Calculate the cross-entropy loss between the logits and the previous predictions
+                            let loss = softmaxCrossEntropy(logits: logits, labels: previousPredictions)
+
+                            // Scale the loss by a weight factor to balance it with the supervised loss
+                            return loss * 0.5
+                        }
+                    }
+
+                /*
+
+            Reinforcement learning algorithms: 
+                
+                These algorithms learn from interacting with their environment and receiving rewards or punishments for certain actions.
+
+                */
+                    import Foundation
+
+                    // Define the environment
+                    struct Environment {
+                        // Current state of the environment
+                        var state: Int
+
+                        // Possible actions the agent can take in the current state
+                        var actions: [Int]
+
+                        // Function to move the environment to the next state based on the action taken
+                        func step(action: Int) -> Int {
+                            // Update the environment's state based on the action taken
+                            state += action
+
+                            // Return the reward for taking the action in the current state
+                            if state == 10 {
+                                return 1
+                            } else {
+                                return 0
+                            }
+                        }
+                    }
+
+                    // Define the agent
+                    class Agent {
+                        // The agent's current policy
+                        var policy: [Int: Double]
+
+                        // The agent's current state
+                        var state: Int
+
+                        // Initialize the agent with an initial policy and state
+                        init(policy: [Int: Double], state: Int) {
+                            self.policy = policy
+                            self.state = state
+                        }
+
+                        // Select an action based on the current policy
+                        func selectAction() -> Int {
+                            let actionProbabilities = policy[state]
+                            let action = Int.random(in: 0...1)
+
+                            if action < actionProbabilities {
+                                return 1
+                            } else {
+                                return -1
+                            }
+                        }
+                    }
+
+                    // Define the reinforcement learning algorithm
+                    func reinforcementLearning(environment: Environment, agent: Agent, numSteps: Int) {
+                        // Loop for the specified number of steps
+                        for _ in 0..<numSteps {
+                            // Select an action based on the current policy
+                            let action = agent.selectAction()
+
+                            // Take the action and observe the reward
+                            let reward = environment.step(action: action)
+
+                            // Update the policy based on the reward
+                            agent.policy[environment.state] = reward
+                        }
+                    }
+
+                    // Create the environment and agent
+                    let environment = Environment(state: 0, actions: [-1, 1])
+                    let agent = Agent(policy: [:], state: 0)
+
+                    // Run the reinforcement learning algorithm for 1000 steps
+                    reinforcementLearning(environment: environment, agent: agent, numSteps: 1000)
+
+                    // Print the final policy
+                    print(agent.policy)
+
+                /*
+
+                In this example,the agent starts in state 0 and can take two actions: 
+                moving one step to the left (-1) or one step to the right (1). 
+                The environment is set up such that the agent receives a reward of 1 when it reaches state 10,
+                and a reward of 0 otherwise. The reinforcement learning algorithm updates the agent's 
+                policy based on the rewards it receives as it interacts with the environment. 
+                After running the algorithm for 1000 steps, the final policy will be printed, 
+                showing the probability of the agent taking each action in each state.
+
+            Deep learning algorithms: 
+                
+                These algorithms use multiple layers of artificial neural networks to learn and make decisions. 
+                Examples include convolutional neural networks (CNNs) and long short-term memory (LSTM) networks.
+
+                */
+                    import TensorFlow
+
+                    // Define the model
+                    let model = Sequential {
+                        Dense(inputSize: 10, outputSize: 64, activation: relu)
+                        Dense(outputSize: 32, activation: relu)
+                        Dense(outputSize: 16, activation: relu)
+                        Dense(outputSize: 1, activation: sigmoid)
+                    }
+
+                    // Compile the model with an optimizer and a loss function
+                    let optimizer = Adam(for: model)
+                    let lossFunction = BinaryCrossEntropy(fromLogits: true)
+
+                    // Define the input and output data for the model
+                    let input = Tensor<Float>(shape: [64, 10], scalars: (0..<640).map { Float($0) })
+                    let labels = Tensor<Int32>(shape: [64], scalars: (0..<64).map { Int32($0 % 2) })
+
+                    // Use the model to make predictions
+                    let logits = model(input)
+                    let predictions = logits.argmax(squeezingAxis: 1)
+
+                    // Calculate the loss and gradient
+                    let (loss, gradient) = model.valueWithGradient { model -> Tensor<Float> in
+                        let logits = model(input)
+                        return lossFunction(logits: logits, labels: labels)
+                    }
+
+                    // Update the model's parameters using the optimizer
+                    optimizer.update(&model.allDifferentiableVariables, along: gradient)
+                /*
+
+                This example defines a simple feedforward neural network with four fully-connected layers and ReLU activations. 
+                It then compiles the model with an Adam optimizer and a binary cross entropy loss function. 
+                The model is then used to make predictions on some input data,
+                and the loss and gradient are calculated using the loss function. Finally,
+                the optimizer is used to update the model's parameters based on the gradient.
+
+            Transfer learning algorithms: 
+            
+                These algorithms use knowledge learned from one task to help improve learning on a related task.
+
+                */
+                    import TensorFlow
+
+                    // Load the pre-trained model
+                    let model = MobileNetV2()
+
+                    // Freeze the layers of the pre-trained model
+                    for layer in model.layers {
+                      layer.trainable = false
+                    }
+
+                    // Add a new classifier layer on top of the pre-trained model
+                    let classifier = Dense(units: 10, activation: "softmax")
+                    model.add(classifier)
+
+                    // Compile the model
+                    let optimizer = Adam(learningRate: 0.001)
+                    model.compile(optimizer: optimizer, loss: "categoricalCrossentropy", metrics: ["accuracy"])
+
+                    // Load the data for the new task
+                    let (xTrain, yTrain), (xTest, yTest) = loadData()
+
+                    // Train the model on the new task
+                    let history = model.fit(x: xTrain, y: yTrain, epochs: 10, batchSize: 32, validationData: (xTest, yTest))
+                /*
+
+            Online learning algorithms: 
+            
+                These algorithms can learn incrementally as new data becomes available,
+                rather than requiring all data to be available upfront.
+
+                */
+                    import Foundation
+
+                    struct OnlineLearningModel {
+                      // The learning rate determines how much the model adjusts its weights with each update.
+                      let learningRate: Double
+                      // The weights of the model, which are updated with each training example.
+                      var weights: [Double]
+
+                      // Initializes the model with a learning rate and an initial set of weights.
+                      init(learningRate: Double, weights: [Double]) {
+                        self.learningRate = learningRate
+                        self.weights = weights
+                      }
+
+                      // Predicts the output for a given input using the current weights of the model.
+                      func predict(input: [Double]) -> Double {
+                        // Calculate the dot product of the input and the weights.
+                        var prediction = 0.0
+                        for (i, weight) in weights.enumerated() {
+                          prediction += input[i] * weight
+                        }
+                        return prediction
+                      }
+
+                      // Updates the weights of the model based on the given input, target output, and predicted output.
+                      mutating func update(input: [Double], targetOutput: Double, predictedOutput: Double) {
+                        // Calculate the error between the target output and the predicted output.
+                        let error = targetOutput - predictedOutput
+                        // Update each weight based on the error and the learning rate.
+                        for i in 0..<weights.count {
+                          weights[i] += learningRate * error * input[i]
+                        }
+                      }
+                    }
+
+                    // Example usage:
+
+                    var model = OnlineLearningModel(learningRate: 0.1, weights: [0.0, 0.0])
+
+                    for i in 1...1000 {
+                      // Generate a random input and target output.
+                      let input = [Double.random(in: 0...1), Double.random(in: 0...1)]
+                      let targetOutput = input[0] + input[1]
+
+                      // Make a prediction using the current weights of the model.
+                      let predictedOutput = model.predict(input: input)
+
+                      // Update the weights of the model based on the prediction error.
+                      model.update(input: input, targetOutput: targetOutput, predictedOutput: predictedOutput)
+                    }
+
+                    print(model.weights) // should be close to [1.0, 1.0]
+
+                /*
+
+            Ensemble learning algorithms: 
+            
+                These algorithms combine the predictions of multiple individual models to make more accurate predictions. Examples include random forests and gradient boosting.
+
+                */
+                    import Foundation
+
+                    class EnsembleLearner {
+                        // Create an array to store the individual models
+                        var models: [Model] = []
+
+                        // Initialize the ensemble with a list of models
+                        init(models: [Model]) {
+                            self.models = models
+                        }
+
+                        // Make a prediction by averaging the predictions of the individual models
+                        func predict(input: [Double]) -> Double {
+                            var prediction = 0.0
+                            for model in models {
+                                prediction += model.predict(input: input)
+                            }
+                            return prediction / Double(models.count)
+                        }
+                    }
+                /*
+
+                To use this ensemble learner,
+                you would first need to create and train the individual models,
+                and then pass them to the EnsembleLearner when creating an instance. 
+                You can then call the predict method to get the ensemble's prediction for a given input.
 */
